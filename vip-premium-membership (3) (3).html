@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIP Premium Membership</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8D5A3;
+      --gold-dark: #A68B3A;
+      --gold-gradient: linear-gradient(135deg, #F5E6C8 0%, #C9A84C 40%, #A68B3A 100%);
+      --gold-shine: linear-gradient(135deg, #F8F1E3 0%, #E8D5A3 25%, #C9A84C 50%, #A68B3A 75%, #8B7330 100%);
+      --white: #FFFFFF;
+      --off-white: #F8F7F4;
+      --soft-cream: #FBF9F4;
+      --soft-gray: #F3F1EC;
+      --text-dark: #1A1A1A;
+      --text-muted: #6B6B6B;
+      --border: #E8E4DC;
+      --shadow: 0 4px 20px rgba(0,0,0,0.05);
+      --shadow-lg: 0 10px 36px rgba(0,0,0,0.07);
+      --shadow-gold: 0 8px 28px rgba(201, 168, 76, 0.22);
+      /* Light brown containers */
+      --card-bg: #EDE4D4;
+      --card-bg-alt: #E5DAC8;
+      --card-border: #D4C4A8;
+      --card-text: #2A2418;
+      --card-text-muted: #6B5E4A;
+      --card-shadow: 0 8px 32px rgba(0,0,0,0.22);
+      --card-shadow-lg: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(165deg, #2A261F 0%, #1E1C18 50%, #181612 100%);
+      color: #F5F0E6;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #1E1C18;
+      border-bottom: 1px solid #3A362E;
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #F5F0E6;
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    .secure-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(135deg, #2A261F, #25221C);
+      border: 1px solid rgba(201,168,76,0.4);
+      padding: 7px 14px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--gold-light);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 50px;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .creator-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow-lg);
+      border: 1px solid var(--card-border);
+      position: sticky;
+      top: 80px;
+    }
+
+    .creator-hero {
+      background: linear-gradient(165deg, #F5EBD8 0%, #EDE4D4 45%, #E5DAC8 100%);
+      padding: 52px 36px 44px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .creator-hero::before {
+      content: '';
+      position: absolute;
+      top: -35%;
+      right: -25%;
+      width: 75%;
+      height: 75%;
+      background: radial-gradient(circle, rgba(201,168,76,0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .creator-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -15%;
+      left: -15%;
+      width: 55%;
+      height: 55%;
+      background: radial-gradient(circle, rgba(201,168,76,0.16) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .created-by {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--gold-light);
+      color: var(--gold-dark);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+      position: relative;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 8px rgba(201,168,76,0.12);
+    }
+
+    .crown-circle {
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #FFFFFF 0%, #F5EBD8 100%);
+      border: 3.5px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 22px;
+      box-shadow: 0 0 48px rgba(201,168,76,0.3), 0 6px 20px rgba(201,168,76,0.18), inset 0 0 20px rgba(255,255,255,0.5);
+      position: relative;
+    }
+
+    .crown-circle::after {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(201,168,76,0.3);
+    }
+
+    .crown-icon {
+      font-size: 3.6rem;
+      filter: drop-shadow(0 3px 8px rgba(201,168,76,0.45));
+    }
+
+    .edu-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--gold-light);
+      color: var(--gold-dark);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 6px 15px;
+      border-radius: 50px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 8px rgba(201,168,76,0.12);
+    }
+
+    .live-members {
+      background: linear-gradient(135deg, #F8F1E3, #EDE4D4);
+      margin: 0 20px;
+      border-radius: 14px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--card-border);
+      position: relative;
+      top: -16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #22C55E;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #22C55E;
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+
+    .live-label {
+      font-size: 0.68rem;
+      color: var(--card-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 500;
+    }
+
+    .live-count {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #16A34A;
+      margin-left: auto;
+      letter-spacing: -0.02em;
+    }
+
+    .description-box {
+      padding: 6px 24px 28px;
+    }
+
+    .description-box h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--card-text);
+      margin-bottom: 12px;
+    }
+
+    .disclaimer {
+      background: var(--card-bg-alt);
+      border-radius: 14px;
+      padding: 16px 18px;
+      border: 1px solid var(--card-border);
+    }
+
+    .disclaimer strong {
+      display: block;
+      font-size: 0.82rem;
+      margin-bottom: 6px;
+      color: var(--card-text);
+    }
+
+    .disclaimer p {
+      font-size: 0.8rem;
+      color: var(--card-text-muted);
+      line-height: 1.6;
+    }
+
+    .right-content {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 7px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--card-text-muted);
+      box-shadow: var(--card-shadow);
+    }
+
+    .plans-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .plans-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #F5F0E6;
+    }
+
+    .plans-count {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--card-text-muted);
+      box-shadow: var(--card-shadow);
+    }
+
+    .plans-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .plan-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 22px 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.28s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plan-card:hover {
+      box-shadow: var(--card-shadow-lg);
+      transform: translateY(-2px);
+      border-color: var(--gold);
+    }
+
+    .plan-card.popular {
+      border: 2px solid var(--gold);
+      background: linear-gradient(135deg, #F5EBD8 0%, #EDE4D4 100%);
+      box-shadow: 0 8px 28px rgba(201, 168, 76, 0.28);
+      padding-top: 32px;
+    }
+
+    .plan-card.popular::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--gold-gradient);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold-gradient);
+      color: #1A1A1A;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 16px;
+      border-radius: 0 0 9px 9px;
+      box-shadow: 0 2px 8px rgba(201,168,76,0.3);
+    }
+
+    .plan-info {
+      flex: 1;
+    }
+
+    .plan-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--card-text);
+      margin-bottom: 3px;
+    }
+
+    .plan-price {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--card-text);
+      letter-spacing: -0.02em;
+    }
+
+    .plan-price span {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--card-text-muted);
+    }
+
+    .plan-members {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: #16A34A;
+      font-weight: 500;
+    }
+
+    .plan-members .dot {
+      width: 6px;
+      height: 6px;
+      background: #16A34A;
+      border-radius: 50%;
+    }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--gold-shine);
+      color: #1A1A1A;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(201,168,76,0.32), inset 0 1px 0 rgba(255,255,255,0.4);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-gold::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 24px rgba(201,168,76,0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+    }
+
+    .btn-gold:hover::before {
+      left: 100%;
+    }
+
+    .btn-gold:active {
+      transform: translateY(0);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 18px 12px;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      transition: all 0.2s ease;
+    }
+
+    .feature-card:hover {
+      box-shadow: var(--card-shadow-lg);
+      border-color: var(--gold);
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #F5EBD8, #EDE4D4);
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      font-size: 1.15rem;
+    }
+
+    .feature-card h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--card-text);
+      margin-bottom: 2px;
+    }
+
+    .feature-card p {
+      font-size: 0.72rem;
+      color: var(--card-text-muted);
+    }
+
+    .testimonials {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px 26px 20px;
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    .testimonials h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--card-text);
+    }
+
+    .slider-wrapper {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 100%;
+    }
+
+    .testimonial-slide {
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+      flex: 0 0 100%;
+      box-sizing: border-box;
+    }
+
+    .testimonial-card {
+      background: linear-gradient(135deg, #F5EBD8, #EDE4D4);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      min-height: 130px;
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .testimonial-card p {
+      font-size: 0.88rem;
+      color: var(--card-text-muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .testimonial-card .author {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--card-text);
+    }
+
+    .slider-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+    }
+
+    .slider-dots {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .slider-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #C4B8A0;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      padding: 0;
+    }
+
+    .slider-dot.active {
+      width: 22px;
+      border-radius: 4px;
+      background: var(--gold);
+    }
+
+    .slider-arrows {
+      display: flex;
+      gap: 8px;
+    }
+
+    .slider-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg-alt);
+      color: var(--card-text-muted);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      box-shadow: var(--card-shadow);
+    }
+
+    .slider-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold-dark);
+      background: #F5EBD8;
+    }
+
+    footer {
+      background: #2A2720;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.78rem;
+      margin-top: 16px;
+    }
+
+    footer p + p {
+      margin-top: 5px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    @media (max-width: 1024px) {
+      .main-grid {
+        grid-template-columns: 400px 1fr;
+        gap: 22px;
+      }
+      .container {
+        max-width: 100%;
+        padding: 28px 20px 40px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+      .creator-card {
+        position: static;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .plan-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .plan-card.popular {
+        padding-top: 36px;
+      }
+      .btn-gold {
+        width: 100%;
+      }
+      .plans-header h2 {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 12px 16px;
+      }
+      .logo {
+        font-size: 1.15rem;
+      }
+      .secure-badge {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+      }
+      .container {
+        padding: 18px 14px 32px;
+      }
+      .trust-badges {
+        gap: 6px;
+      }
+      .badge {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+      }
+      .features {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .feature-card {
+        padding: 14px 10px;
+      }
+      .feature-card h4 {
+        font-size: 0.8rem;
+      }
+      .plan-price {
+        font-size: 1.4rem;
+      }
+      .testimonial-card {
+        padding: 18px 16px;
+        min-height: 140px;
+      }
+      .testimonial-card p {
+        font-size: 0.82rem;
+      }
+      .slider-btn {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+      .trust-badges {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">VIP <span>Premium</span> Member</div>
+    <div class="secure-badge">
+      🔒 100% Secure Checkout
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="main-grid">
+      <div class="creator-card">
+        <div class="creator-hero">
+          <div class="created-by">✓ Created By</div>
+          <div class="crown-circle">
+            <span class="crown-icon">👑</span>
+          </div>
+          <div class="edu-tag">🎓 Education</div>
+        </div>
+
+        <div class="live-members">
+          <span class="live-dot"></span>
+          <div>
+            <div class="live-label">Live Members</div>
+          </div>
+          <div class="live-count">6,683</div>
+        </div>
+
+        <div class="description-box">
+          <h3>Description</h3>
+          <div class="disclaimer">
+            <strong>Disclaimer</strong>
+            <p>Join our exclusive VIP Membership to unlock premium features, expert insights, and high-value content designed to help you grow faster and smarter.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-content">
+        <div class="trust-badges">
+          <div class="badge">🔒 256-bit SSL</div>
+          <div class="badge">⚡ Instant Access</div>
+          <div class="badge">✅ Verified Creator</div>
+          <div class="badge">🇮🇳 India Trusted</div>
+          <div class="badge">💬 24/7 Support</div>
+        </div>
+
+        <div class="plans-header">
+          <h2>Choose Your Plan</h2>
+          <div class="plans-count">3 Plans Available</div>
+        </div>
+
+        <div class="plans-list">
+          <div class="plan-card">
+            <div class="plan-info">
+              <div class="plan-name">1 Month</div>
+              <div class="plan-price">₹2,999.00 <span>/ 1 Month</span></div>
+              <div class="plan-members">
+                <span class="dot"></span>
+                1,288 members active
+              </div>
+            </div>
+            <button class="btn-gold">Buy Now</button>
+          </div>
+
+          <div class="plan-card">
+            <div class="plan-info">
+              <div class="plan-name">Yearly Plan</div>
+              <div class="plan-price">₹3,999.00 <span>/ 3 Months</span></div>
+              <div class="plan-members">
+                <span class="dot"></span>
+                975 members active
+              </div>
+            </div>
+            <button class="btn-gold">Buy Now</button>
+          </div>
+
+          <div class="plan-card popular">
+            <div class="popular-badge">★ Most Popular</div>
+            <div class="plan-info">
+              <div class="plan-name">Life Time</div>
+              <div class="plan-price">₹4,999.00 <span>/ Life time</span></div>
+              <div class="plan-members">
+                <span class="dot"></span>
+                4,422 members active
+              </div>
+            </div>
+            <button class="btn-gold">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="features">
+          <div class="feature-card">
+            <div class="feature-icon">📈</div>
+            <h4>Live Signals</h4>
+            <p>Real-time alerts</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎓</div>
+            <h4>Education</h4>
+            <p>Expert sessions</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💬</div>
+            <h4>VIP Group</h4>
+            <p>Private Telegram</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h4>Secure Pay</h4>
+            <p>256-bit SSL</p>
+          </div>
+        </div>
+
+        <div class="testimonials">
+          <h3>What Members Say</h3>
+          <div class="slider-wrapper">
+            <div class="slider-track" id="sliderTrack">
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <div class="stars">★★★★★</div>
+                  <p>"Signals are incredibly accurate. Made ₹42,000 profit in my very first month! Best trading community I have ever joined."</p>
+                  <div class="author">— Ravi K., Mumbai</div>
+                </div>
+              </div>
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <div class="stars">★★★★★</div>
+                  <p>"Education content is worth 10x the price. Went from a complete beginner to confidently trading in just 3 months!"</p>
+                  <div class="author">— Priya S., Delhi</div>
+                </div>
+              </div>
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <div class="stars">★★★★★</div>
+                  <p>"Always responsive in the VIP group. Live weekend sessions are extremely valuable. Everyone should join this community!"</p>
+                  <div class="author">— Aakash T., Pune</div>
+                </div>
+              </div>
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <div class="stars">★★★★★</div>
+                  <p>"Yearly plan is the best value for money. Consistent signals, excellent support. Totally worth every single rupee!"</p>
+                  <div class="author">— Suman R., Bangalore</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slider-controls">
+            <div class="slider-dots" id="sliderDots"></div>
+            <div class="slider-arrows">
+              <button class="slider-btn" id="prevBtn" aria-label="Previous">‹</button>
+              <button class="slider-btn" id="nextBtn" aria-label="Next">›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 VIP Membership. All rights reserved.</p>
+    <p>Join, learn, and grow with our exclusive VIP network.</p>
+  </footer>
+
+  <script>
+    (function() {
+      const track = document.getElementById('sliderTrack');
+      const dotsContainer = document.getElementById('sliderDots');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const slides = track.querySelectorAll('.testimonial-slide');
+      const total = slides.length;
+      let current = 0;
+      let autoTimer;
+
+      for (let i = 0; i < total; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(dot);
+      }
+      const dots = dotsContainer.querySelectorAll('.slider-dot');
+
+      function goTo(index) {
+        current = (index + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+        resetAuto();
+      }
+
+      function next() { goTo(current + 1); }
+      function prev() { goTo(current - 1); }
+
+      nextBtn.addEventListener('click', next);
+      prevBtn.addEventListener('click', prev);
+
+      function resetAuto() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(next, 4500);
+      }
+      resetAuto();
+
+      const wrapper = track.closest('.testimonials');
+      wrapper.addEventListener('mouseenter', () => clearInterval(autoTimer));
+      wrapper.addEventListener('mouseleave', resetAuto);
+
+      // Keep slide aligned on resize
+      window.addEventListener('resize', () => {
+        track.style.transition = 'none';
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        requestAnimationFrame(() => {
+          track.style.transition = '';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
